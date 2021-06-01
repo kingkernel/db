@@ -3,7 +3,6 @@
     "description": "Classe de banco de dados da Kingkernel",
     "type": "project",
     "license": "MIT",
-    "minimum-stability": "stable",
      "authors": [
         {
             "name": "Nome do autor",
