@@ -1,0 +1,7 @@
+{
+    "name": "kingkernel/DB",
+    "description": "Classe de banco de dados da Kingkernel",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "dev"
+}
