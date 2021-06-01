@@ -3,5 +3,18 @@
     "description": "Classe de banco de dados da Kingkernel",
     "type": "project",
     "license": "MIT",
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+     "authors": [
+        {
+            "name": "Nome do autor",
+            "email": "daniel.santos.ap@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev-main",
+    "require": {},
+    "autoload": {
+            "psr-4": {
+                "kingkernel\\DB\\": ""
+            }
+        }
 }
