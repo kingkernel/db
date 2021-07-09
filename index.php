@@ -6,7 +6,13 @@ define('DB_NAME'        , "dbkingkernel");
 define('DB_DRIVER'      , "mysql");
 
 require_once "Conexao.php";
-use kingkernel\DB;
+require ('vendor/autoload.php');
+
+use kingkernel\Database\DB;
+
+DB::ifExists();
+
+/*
 try{
 
     $Conexao = Conexao::getConnection();
@@ -67,5 +73,5 @@ try{
 </html>
 <?php
 echo "Número de tabelas : " . $numtables . "<br/>";
-
+*/
 ?>
