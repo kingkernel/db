@@ -8,8 +8,16 @@ class Conexao
 
     public static function getConnection() {
 
-        $pdoConfig  = DB_DRIVER . ":". "Server=" . DB_HOST . ";";
-        $pdoConfig .= "Database=".DB_NAME.";";
+        switch (DB_DRIVER){
+            case 'sqlsrv':
+                $pdoConfig  = DB_DRIVER . ":". "Server=" . DB_HOST . ";";
+                $pdoConfig .= "Database=".DB_NAME.";";
+            break;
+            case 'mysql' :
+                $pdoConfig  = DB_DRIVER . ":". "host=" . DB_HOST . ";";
+                $pdoConfig .= "dbname=".DB_NAME.";";
+            break;
+            }
 
         try {
             if(!isset($connection)){
