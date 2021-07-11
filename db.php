@@ -1,9 +1,17 @@
 <?php
 
+
 namespace Kingkernel\Database;
 
-class DB 
+abstract class DB
 {
+    private $host;
+    private $database;
+    private $dbuser;
+    private $dbpassword;
+    private $port;
+    private $drive;
+
     public function __construct()
     {
 
