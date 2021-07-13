@@ -1,20 +1,32 @@
 <?php
-
+/**
+ * Class name: DB
+ * Function : Work all basic functions like connect and CRUD
+ * Data creation : 2021-07-09
+ * Autors : Daniels Hogans
+ * Email : daniel.santos.ap@gmail.com
+ */
 
 namespace Kingkernel\Database;
 
 abstract class DB
 {
     private $host;
-    private $database;
+    private $dbname;
     private $dbuser;
     private $dbpassword;
     private $port;
     private $drive;
+    public $connection;
 
-    public function __construct()
+    public function __construct($env)
     {
-
+        $this->dbhost = $_ENV['DB_HOST'];
+        $this->dbuser = $_ENV['DB_USER'];
+        $this->dbpassword = $_ENV['DB_PASSWORD'];
+        $this->dbname = $_ENV['DB_NAME'];
+        $this->drive = $_ENV['DB_DRIVER'];
+        return $this;
     }
     private function connection()
     {
@@ -26,18 +38,18 @@ abstract class DB
     }
     public static function teste()
     {
-        echo "ola mundo";
+       
     }
     public static function getConnection() {
 
-        switch (DB_DRIVER){
+        switch ($this->drive){
             case 'sqlsrv':
                 $pdoConfig  = DB_DRIVER . ":". "Server=" . DB_HOST . ";";
                 $pdoConfig .= "Database=".DB_NAME.";";
             break;
             case 'mysql' :
-                $pdoConfig  = DB_DRIVER . ":". "host=" . DB_HOST . ";";
-                $pdoConfig .= "dbname=".DB_NAME.";";
+                $pdoConfig  = $this->drive . ":". "host=" . $this->dbhost . ";";
+                $pdoConfig .= "dbname=".$this->dbname.";";
             break;
             }
 
