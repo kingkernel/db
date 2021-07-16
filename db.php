@@ -9,27 +9,44 @@ namespace Kingkernel\Database;
 
 abstract class DB 
 {
-    private $drive;
-    private $dbname;
-    private $dbhost;
-    private $dbuser;
     public $connection;
+    public $config;
+    public static $teste;
 
     public function __construct()
     {
-        env()
+        
     }
-    private function connection()
+    public static function init()
     {
-
+        $_ENV["DATABASE"] = parse_ini_file(".env");
+        return $_ENV["DATABASE"];
     }
-    public function load_databases()
+    public static function load_databases()
     {
-
+        $dbInfo = self::init();
+        $dbuser = $dbInfo["DB_USER"];
+        $pdoConfig  = $dbInfo["DB_DRIVER"] . ":". "host=" . $dbInfo["DB_HOST"] . ";";
+        $pdoConfig .= "dbname=".$dbInfo["DB_NAME"];
+        try {
+            $connection = new \PDO($pdoConfig, $dbInfo["DB_USER"], $dbInfo['DB_PASSWORD']);
+            $connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        } catch (\Throwable $th) {
+            //throw $th;
+            print_r($th);
+        };
+        //print_r($dbInfo);
+        //print_r($pdoConfig);
+        //print_r(self::init());
+        //$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //$sql = 'show databases';
+        //$query = $connection->query($sql);
+        //$query->fetcAll();
+        //print_r($query);
     }
     public static function teste()
     {
-        echo "ola mundo";
+        print_r($this);
     }
     public static function getConnection() {
 

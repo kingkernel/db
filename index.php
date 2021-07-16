@@ -1,15 +1,13 @@
 <?php
-define('DB_HOST'        , "localhost");
-define('DB_USER'        , "root");
-define('DB_PASSWORD'    , "root");
-define('DB_NAME'        , "dbkingkernel");
-define('DB_DRIVER'      , "mysql");
-
+session_start();
 require(__DIR__ .'/vendor/autoload.php');
 
 use Kingkernel\Database\DB;
-
-DB::teste();
+//$_SESSION["DB"] = parse_ini_file(".env");
+//$_ENV["DBCONFIG"] = parse_ini_file(".env");
+//print_r($_ENV["DBCONFIG"]);
+//echo "ola";
+DB::load_databases();
 
 /*
 try{
