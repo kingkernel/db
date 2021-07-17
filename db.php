@@ -41,12 +41,19 @@ abstract class DB
         $cn = self::connect();
         self::$queryString = $query;
         self::$query = $cn->query(self::$queryString);
-        self::$data = self::$query->fetchall();
-        //return self::$data;
-        self::echo ();
+        self::$data = self::$query->fetchall(\PDO::FETCH_ASSOC);
+        self::get();
     }
-    public static function echo()
+    public static function get()
     {
-        print_r(self::$data);
+        self::connect();
+        $data = json_encode(self::$data, JSON_PRETTY_PRINT);
+        echo $data;
+    }
+    public static function toJson()
+    {
+        //$data = json_encode(self::$data);
+        //self::$data = $data;
+        //self::echo();
     }
 }
