@@ -4,3 +4,4 @@ require(__DIR__ .'/vendor/autoload.php');
 
 use Kingkernel\Database\DB;
 DB::select("select * from usuarios");
+//DB::get();

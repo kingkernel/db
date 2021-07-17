@@ -46,14 +46,21 @@ abstract class DB
     }
     public static function get()
     {
-        self::connect();
         $data = json_encode(self::$data, JSON_PRETTY_PRINT);
         echo $data;
     }
-    public static function toJson()
+    public function __get($feacture)
     {
-        //$data = json_encode(self::$data);
-        //self::$data = $data;
-        //self::echo();
+        switch ($feacture) {
+            case 'get':
+                echo "metodo get";
+                break;
+            case 'toJson':
+                echo "metodo get";
+                break;
+            default:
+                # code...
+                break;
+        }
     }
 }
