@@ -42,6 +42,7 @@ abstract class DB
         self::$queryString = $query;
         self::$query = $cn->query(self::$queryString);
         self::$data = self::$query->fetchall(\PDO::FETCH_ASSOC);
+        //return self;
         self::get();
     }
     public static function get()
