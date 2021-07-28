@@ -17,7 +17,7 @@ abstract class DB
 
     public function __construct()
     {
-        
+
     }
     public static function init()
     {
@@ -50,7 +50,6 @@ abstract class DB
     }
     public static function get()
     {
-
         $data = json_encode(self::$data, JSON_PRETTY_PRINT);
         echo $data;
     }
