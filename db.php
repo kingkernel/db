@@ -13,6 +13,7 @@ abstract class DB
     private static $queryString;
     private static $query;
     private static $data;
+    private static $th;
 
     public function __construct()
     {
@@ -31,24 +32,56 @@ abstract class DB
         try {
             $connection = new \PDO($pdoConfig, $dbInfo["DB_USER"], $dbInfo['DB_PASSWORD']);
             $connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            return $connection;
+            self::$connect = $connection;
+            return self::$connect;
             } catch (\Throwable $th) {
-            return $th;
+                self::$th = $th;
+                return self::$th;
         };
     }
-    public static function select($query)
+    public static function RAW($query)
     {
         $cn = self::connect();
         self::$queryString = $query;
         self::$query = $cn->query(self::$queryString);
         self::$data = self::$query->fetchall(\PDO::FETCH_ASSOC);
-        //return self;
+        //return self::$data;
         self::get();
     }
     public static function get()
     {
+
         $data = json_encode(self::$data, JSON_PRETTY_PRINT);
         echo $data;
+    }
+    public static function call($string, $argArry)
+    {
+        if(!is_string($string)){
+            echo 'the first argument must be string';
+            exit;
+        };
+        if(!is_array($argArry)){
+            echo 'the second argument must be an array';
+            exit;
+        };
+        $cn = self::connect();
+        $query = 'call '. $string .'('.implode(',', array_map('self::doubleQuotes', $argArry)).')';
+        self::$queryString = $query;
+        try {
+            self::$query = $cn->query(self::$queryString);
+            self::$data = self::$query->fetchall(\PDO::FETCH_ASSOC);
+            self::get();
+        } catch (\Throwable $th) {
+            //throw $th;
+            print_r($th);
+        }
+        //return self::$data;
+        //self::get();
+        //echo $query;
+    }
+    public static function doubleQuotes($string){
+        $newString = '"'.$string.'"';
+        return $newString;
     }
     public function __get($feacture)
     {
