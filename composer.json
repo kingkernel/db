@@ -1,0 +1,19 @@
+{
+    "name": "kingkernel/db",
+    "description": "biblioteca para manipulação de querys com o banco de dados.",
+    "type": "library",
+    "license": "BSD",
+    "autoload": {
+        "psr-4": {
+            "Kingkernel\\Db\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel José dos Santos",
+            "email": "daniel.santos.ap@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
